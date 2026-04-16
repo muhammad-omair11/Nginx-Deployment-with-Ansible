@@ -1,0 +1,22 @@
+---
+- name: Nginx setup
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Install Nginx
+      package:
+        name: nginx
+        state: present
+
+
+    - name: Start and enable Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+     
+    - name: Copy web app
+      copy:
+        src: file/index.html
+        dest: /usr/share/nginx/html/index.html     
